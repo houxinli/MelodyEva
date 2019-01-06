@@ -1,14 +1,15 @@
 from .base_analyzer import BaseAnalyzer
 import time
 import math
-import numpy as np, scipy, matplotlib.pyplot as plt, IPython.display as ipd
+import numpy as np, scipy, matplotlib.pyplot as plt
 import librosa, librosa.display
 
 
 print ("pitch_analyzer __name__ :", __name__)
 # acf and deal with voice
-def deal1_pa(path):
-    x, sr = librosa.load(path)  # read the voice
+def deal1_pa(x, sr):
+    # x, sr = librosa.load(path)  # read the voice
+    # sr = self.sr
     f_hi = 1100  # the highest voice of women
     f_lo = 82  # the lowest voice of man
     t_lo = sr / f_hi  # the possible shortest time of the highest peak appear
@@ -207,20 +208,22 @@ def deal2_da(data):
 
 class PitchAnalyzer(BaseAnalyzer):
     def __init__(self,
-            refresh_time = 1
+            refresh_time = 1,
+            path = "mp3/source_2.mp3"
             ):
         BaseAnalyzer.__init__(self)
         self.refresh_time = refresh_time
         self.cpos = 0
         self.result = []
         self.counter = 0
+        self.original, self.sr = librosa.load(path)
 
     def register_recorder(self,recorder):
         BaseAnalyzer.register_recorder(self,recorder)
         self.refresh_size = self.sr * self.refresh_time
 
     def data_process(self,data):
-        nt0 = deal1_pa("../MyServe/music_score/source_2.mp3")
+        nt0 = deal1_pa(data, self.sr)
         nt1 = deal1_da(data)
         print(nt0)
         print(nt1)
@@ -245,7 +248,7 @@ class PitchAnalyzer(BaseAnalyzer):
         print ("pitch_mark1:")
         print (pitch_mark1*0.1)
 
-        chroma0 = deal2_pa("../MyServe/music_score/source_2.mp3")
+        chroma0 = deal2_pa("mp3/source_2.mp3")
         chroma1 = deal2_da(data)
         chroma0 = np.transpose(chroma0)
         chroma1 = np.transpose(chroma1)
