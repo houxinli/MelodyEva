@@ -4,6 +4,7 @@ from pyaudio import PyAudio,paInt16
 import numpy as np
 import queue
 import time
+import wave
 
 class CoreRecorder(threading.Thread):
     def __init__(self,

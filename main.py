@@ -1,6 +1,7 @@
 from au import SimpleRecorder
 from au.pitch_analyzer import PitchAnalyzer
 from beat_ import Tempo
+from MER.mer2 import MusicEmotionRecognizer
 import threading
 import numpy as np
 import time
@@ -38,6 +39,19 @@ def getScore():
 	return score_pitch * 100, score_beat
 	# return score_pitch
 
+@eel.expose
+def getOringinalEmotion():
+	global er
+	clas0 = er.predictEmotion('mp3/source_2.mp3')
+	return clas0
+	# 计算原始歌曲情绪
+
+@eel.expose
+def getEmotion():
+	global er
+	clas1 = er.predictEmotion('record.wav')
+	return clas1
+
 def getBeatScore():
 	global PA, BA
 	y1 = np.array(PA.original[PA.cpos:PA.cpos + PA.refresh_size]).astype(np.float32)
@@ -59,6 +73,8 @@ if __name__ == '__main__':
 	# 注册分析器
 	SR.register(PA)
 
+	# 注册情绪分析器
+	er = MusicEmotionRecognizer()
 
 	eel.start('index.html', size=(1536, 864))    # Start
 # eel.start('realtime.html', size=(1536, 864))    # Start
