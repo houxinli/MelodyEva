@@ -43,15 +43,15 @@ def getScore():
 def getOriginalEmotion():
 	global er
 	clas0 = er.predictEmotion('mp3/source_2.mp3')
-	print("original: " + clas0)
+	print("original: ", clas0)
 	return clas0
 	# 计算原始歌曲情绪
 
 @eel.expose
 def getEmotion():
 	global er
-	clas1 = er.predictEmotion('record.wav')
-	print("me: " + clas1)
+	clas1 = er.predictEmotion('web/record.wav')
+	print("me: ", clas1)
 	return clas1
 
 def getBeatScore():

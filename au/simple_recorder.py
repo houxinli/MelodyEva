@@ -6,7 +6,7 @@ import time
 
 class SimpleRecorder(threading.Thread):
     def __init__(self,
-            sr = 2000, #Sample Rate
+            sr = 22050, #Sample Rate
             ):
         threading.Thread.__init__(self)
         self.audio_data = []
@@ -42,7 +42,7 @@ class SimpleRecorder(threading.Thread):
             analyzer.stop()
             analyzer.join()
         self.recorder.stop()
-        self.recorder.save_wave_file("web/record.mp3", self.audio_data)
+        self.recorder.save_wave_file("web/record.wav", self.audio_data)
         self.recorder.join()
 
     def stop(self):

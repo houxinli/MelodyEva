@@ -1,7 +1,7 @@
 var recorder = document.getElementById("recorder");
 var accuracyScoreSpan = document.getElementById("accuracyScoreSpan");
 var rhythmScoreSpan = document.getElementById("rhythmScoreSpan");
-var originalEmotionSpan = document.getElementById("originalEmotion");
+var originalEmotionSpan = document.getElementById("originalEmotionSpan");
 var meEmotionSpan = document.getElementById("meEmotionSpan");
 
 var flag = false;
@@ -39,7 +39,7 @@ function stopRecord(){
 
 function playRecord(){
 	console.log("playRecord");
-	recorder.setAttribute("src", "record.mp3");
+	recorder.setAttribute("src", "record.wav");
 	recorder.currentTime = 0;
 	recorder.play();
 }

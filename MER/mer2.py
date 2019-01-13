@@ -50,7 +50,8 @@ class MusicEmotionRecognizer:
             feature[name] = (feature[name] - self.moles[i]) / self.denos[i]
         res = self.kNN.predict(feature)
         clas = {"sad": 1, "happy": 2, "relax": 3, "angry": 4}
-        return clas[res[0]]
+        # return clas[res[0]]
+        return res[0]
 
     def _extractFeature(self, file):
         feature_set = pd.DataFrame()  # 特征矩阵
@@ -92,10 +93,11 @@ class MusicEmotionRecognizer:
 
         # 取前60秒
         try:
-            y, sr = librosa.load(file, sr=22050, offset=60, duration=60)
+            y, sr = librosa.load(file, sr=22050, offset=0, duration=60)
         except NoBackendError:
             print("File Error.")
             return
+        print(y.shape)
         S = np.abs(librosa.stft(y))
 
         # 提取特征
