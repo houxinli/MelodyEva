@@ -44,23 +44,23 @@ class Tempo:
             else:
                 backlink[i]=timerange[maxbeatpos]
                 flag=0
-        print(backlink)
-        print(cumscore)
+        #print(backlink)
+        #print(cumscore)
         maxindex=np.where(cumscore == np.max(cumscore))
         medscore=np.median(cumscore[maxindex])
         bestendpos=cumscore*medscore>0.5*medscore
         end=np.argwhere(bestendpos).max()
-        print(end)
+        #print(end)
         beats.append(int(end))
         while backlink[beats[-1]]>=0:
             beats.append(int(backlink[beats[-1]]))
         beats.reverse()
-        print(beats)
-        print(len(beats))
+        #print(beats)
+        #print(len(beats))
         return beats
 
     def onsetdetection(self,y,sr):
-        print(y.shape)
+        #print(y.shape)
         sro=22050
         swin=2048 #window size
         shop=512
@@ -105,7 +105,7 @@ class Tempo:
 
 """
 #tempogram = librosa.feature.tempogram(onset_envelope=onset, sr=sr,hop_length = shop)
-#print(tempogram)
+##print(tempogram)
 start_bpm = 120
 std = 1.0
 automaxsize=round(4*oesr) #4s

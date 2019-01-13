@@ -1,4 +1,4 @@
-import numpy as np
+﻿import numpy as np
 import pandas as pd
 import librosa
 from audioread import NoBackendError
@@ -7,7 +7,7 @@ from sklearn.neighbors import KNeighborsClassifier
 
 # 识别的时间在10s左右
 class MusicEmotionRecognizer:
-    def __init__(self, featureFile='EmotionFeatures2.csv'):
+    def __init__(self, featureFile='MER/EmotionFeatures2.csv'):
         """
         初始化情绪识别类
         :param featureFile: 特征文件，默认是同级目录下的'EmotionFeatures2.csv'文件
