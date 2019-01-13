@@ -348,36 +348,19 @@ input[type=range]::-webkit-slider-thumb {
   position: relative;
   color: rgba(255,255,255,1);
   text-decoration: none;
-  background-color: rgb(32, 71, 129);
-  font-family: 'Yanone Kaffeesatz';
-  font-weight: 700;
+  background-color: rgba(32, 71, 129, 0.5);
+  font-weight: 300;
   font-size: 3em;
   display: block;
-  padding: 4px;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
+  padding: 10px;
   border-radius: 8px;
-  -webkit-box-shadow: 0px 9px 0px rgb(53, 41, 119), 0px 9px 25px rgba(0,0,0,.7);
-  -moz-box-shadow: 0px 9px 0px rgb(53, 41, 119), 0px 9px 25px rgba(0,0,0,.7);
-  box-shadow: 0px 9px 0px rgb(53, 41, 119), 0px 9px 25px rgba(0,0,0,.7);
   margin: 100px auto;
-  width: 160px;
+  width: 200px;
   text-align: center;
-  
-  -webkit-transition: all .1s ease;
-  -moz-transition: all .1s ease;
-  -ms-transition: all .1s ease;
-  -o-transition: all .1s ease;
-  transition: all .1s ease;
+  border: none;
 }
 
-.controlBtn:active {
-  -webkit-box-shadow: 0px 3px 0px rgb(53, 41, 119), 0px 3px 6px rgba(0,0,0,.9);
-  -moz-box-shadow: 0px 3px 0px rgb(53, 41, 119), 0px 3px 6px rgba(0,0,0,.9);
-  box-shadow: 0px 3px 0px rgb(53, 41, 119), 0px 3px 6px rgba(0,0,0,.9);
-  position: relative;
-  top: 6px;
-}
+
 
 
 .scoreDiv{
