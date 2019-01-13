@@ -256,7 +256,7 @@ class PitchAnalyzer(BaseAnalyzer):
         D, wp = librosa.sequence.dtw(chroma0, chroma1, subseq=True)
         for i in range(0,len(chroma1[0])):
             cost += D[wp[i][1],wp[i][0]]
-        pitch_mark2 = 1 - math.atan(cost/20) * 2 / math.pi
+        pitch_mark2 = 1 - math.atan(cost/10000) * 2 / math.pi
         #print ("pitch_mark2:")
         #print (pitch_mark2*0.9)
         #print ("pitch_mark:")

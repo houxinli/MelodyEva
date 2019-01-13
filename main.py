@@ -69,7 +69,7 @@ if __name__ == '__main__':
 	SR = SimpleRecorder()
 
 	# 创建分析器
-	PA = PitchAnalyzer(refresh_time = 10)
+	PA = PitchAnalyzer(refresh_time = 5)
 	BA = Tempo()
 
 	# 注册分析器

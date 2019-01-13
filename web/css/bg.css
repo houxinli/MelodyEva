@@ -1,3 +1,7 @@
+input{
+  cursor: pointer;
+}
+
 body {
   background-color: #02080f;
 }
