@@ -46,7 +46,7 @@ function playRecord(){
 		return;
 	}
 	console.log("playRecord");
-	recorder.setAttribute("src", "record.mp3");
+	recorder.setAttribute("src", "record.wav");
 	recorder.currentTime = 0;
 	recorder.play();
 }
