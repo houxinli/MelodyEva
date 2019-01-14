@@ -199,6 +199,10 @@ def deal2_pa(path):
     for i in range(0,len(chroma)):
         chroma[i] = Z_ScoreNormalization(chroma[i], np.average(chroma[0]), np.std(chroma[0]))
     return chroma
+
+srcscore = deal2_pa("mp3/source_2.mp3")
+#print ("print (srcscore)")
+#print (srcscore)
 def deal2_da(data):
     chroma = librosa.feature.chroma_stft(y=data, sr=22050)
     chroma = np.transpose(chroma)
@@ -215,7 +219,7 @@ class PitchAnalyzer(BaseAnalyzer):
         self.refresh_time = refresh_time
         self.cpos = 0
         self.result = []
-        self.counter = 0
+        self.counter = 0.8035
         self.original, self.sr = librosa.load(path)
 
     def register_recorder(self,recorder):
@@ -223,46 +227,45 @@ class PitchAnalyzer(BaseAnalyzer):
         self.refresh_size = self.sr * self.refresh_time
 
     def data_process(self,data):
-        # nt0 = deal1_pa(data, self.sr)
-        # nt1 = deal1_da(data)
-        #print(nt0)
-        #print(nt1)
+        nt0 = deal1_pa(data, self.sr)
+        nt1 = deal1_da(data)
+        # print(nt0)
+        # print(nt1)
         # choose the shortest voice
 
-        # scale = float(len(nt1)) / len(nt0)
-        #print(scale)
+        scale = float(len(nt1)) / len(nt0)
+        # print(scale)
         # compare with the Pitch standards
         # relatively
-        # compare = 0.0
-        # count1 = 0
-        # delta = 0.0
-        # for i in range(0, len(nt0)):
-        #     if nt0[i] > 0 and i * scale < len(nt1) and nt1[int(i * scale)] > 0:
-        #         delta += nt0[i] - nt1[int(i * scale)]
-        #         count1 += 1
-        # delta = delta / count1
-        # for i in range(0, len(nt0)):
-        #     if nt0[i] > 0 and i * scale < len(nt1) and nt1[int(i * scale)] > 0:
-        #         compare += float(abs(nt0[i] - nt1[int(i * scale)] - delta)) / 40
-        # pitch_mark1 = 1 - compare / count1
+        compare = 0.0
+        count1 = 0
+        delta = 0.0
+        for i in range(0, len(nt0)):
+            if nt0[i] > 0 and i * scale < len(nt1) and nt1[int(i * scale)] > 0:
+                delta += nt0[i] - nt1[int(i * scale)]
+                count1 += 1
+        delta = delta / count1
+        for i in range(0, len(nt0)):
+            if nt0[i] > 0 and i * scale < len(nt1) and nt1[int(i * scale)] > 0:
+                compare += float(abs(nt0[i] - nt1[int(i * scale)] - delta)) / 40
+        pitch_mark1 = 1 - compare / count1
         #print ("pitch_mark1:")
         #print (pitch_mark1*0.1)
-
-        chroma0 = deal2_pa("mp3/source_2.mp3")
+        chroma0 = srcscore
         chroma1 = deal2_da(data)
         chroma0 = np.transpose(chroma0)
         chroma1 = np.transpose(chroma1)
         cost = 0
         D, wp = librosa.sequence.dtw(chroma0, chroma1, subseq=True)
-        for i in range(0,len(chroma1[0])):
+        for i in range(0,len(wp[0])):
             cost += D[wp[i][1],wp[i][0]]
-        pitch_mark2 = 1 - math.atan(cost/10000) * 2 / math.pi
+        pitch_mark2 = 1 - math.atan(cost/400) * 2 / math.pi
         #print ("pitch_mark2:")
-        #print (pitch_mark2*0.9)
+        #print (pitch_mark2)
         #print ("pitch_mark:")
 
-        self.counter = pitch_mark2
-        # self.counter = 0.1*pitch_mark1+0.9*pitch_mark2
+        # self.counter = pitch_mark2
+        self.counter = 0.1*pitch_mark1+0.9*pitch_mark2
         #print (self.counter)
         # self.counter = pitch_mark2
         return self.counter

@@ -42,6 +42,7 @@ class SimpleRecorder(threading.Thread):
             analyzer.stop()
             analyzer.join()
         self.recorder.stop()
+        print ("data0:" + self.audio_data)
         self.recorder.save_wave_file("web/record.wav", self.audio_data)
         self.recorder.join()
 

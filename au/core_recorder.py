@@ -1,3 +1,5 @@
+#!/usr/bin/env python3.7
+# -*- coding: utf-8 -*-
 import threading
 import logging
 from pyaudio import PyAudio,paInt16
@@ -9,7 +11,7 @@ import wave
 class CoreRecorder(threading.Thread):
     def __init__(self,
             time = None, #How much time to the end
-            sr = 20000, #Sample rate
+            sr = 22050, #Sample rate
             batch_num  = 600, #Batch size (how much data for a single fetch)
             frames_per_buffer = 600 
             ):
@@ -47,6 +49,7 @@ class CoreRecorder(threading.Thread):
         stream.close()
 
     def save_wave_file(self,filename,data):
+        print ("data:" + data)
         wf=wave.open(filename,'wb')
         wf.setnchannels(1)
         wf.setsampwidth(2)

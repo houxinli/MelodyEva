@@ -1,11 +1,15 @@
+#!/usr/bin/env python3.7
+# -*- coding: utf-8 -*-
 from au import SimpleRecorder
 from au.pitch_analyzer import PitchAnalyzer
+from au.volume_analyzer import VolumeAnalyzer
 from beat_ import Tempo
 from MER.mer2 import MusicEmotionRecognizer
 import threading
 import numpy as np
 import time
 import eel
+import gevent
 
 print ("pa_test.py __name__ :", __name__)
 
@@ -36,7 +40,7 @@ def getScore():
 	score_pitch = PA.getScore()
 	score_beat = getBeatScore()
 	print("score_pitch : ", score_pitch )
-	return score_pitch * 100, score_beat
+	return score_pitch * 100 + np.random.randint(0,10), score_beat
 	# return score_pitch
 
 @eel.expose
@@ -69,7 +73,7 @@ if __name__ == '__main__':
 	SR = SimpleRecorder()
 
 	# 创建分析器
-	PA = PitchAnalyzer(refresh_time = 5)
+	PA = PitchAnalyzer(refresh_time = 1)
 	BA = Tempo()
 
 	# 注册分析器

@@ -17,9 +17,10 @@ function setScore(){
 
 
 function startRecord(){
+	alert("录音开始");
 	console.log("startRecord");
 	eel.initRecorder();
-	window.setInterval(setScore, 10000);
+	Timer = window.setInterval(setScore, 10000);
 	recorder.setAttribute("src", "banzou_2.mp3");
 	recorder.currentTime = 0;
 	recorder.play();
@@ -28,9 +29,10 @@ function startRecord(){
 };
 
 function stopRecord(){
+	alert("录音结束");
 	console.log("stopRecord");
 	eel.stopRecorder();
-
+	Timer = window.clearInterval(Timer);
 	recorder.pause();
 	recorder.currentTime = 0;
 
@@ -38,8 +40,13 @@ function stopRecord(){
 }
 
 function playRecord(){
+	console.log("moodAnalyze");
+	if(flag == false){
+		alert("请先停止录音");
+		return;
+	}
 	console.log("playRecord");
-	recorder.setAttribute("src", "record.wav");
+	recorder.setAttribute("src", "record.mp3");
 	recorder.currentTime = 0;
 	recorder.play();
 }
@@ -66,6 +73,7 @@ function moodAnalyze(){
 		alert("请先停止录音");
 		return;
 	}
+	alert("正在分析请稍等...");
 	eel.getOriginalEmotion()(setOriginalEmotion);
 	eel.getEmotion()(setEmotion);
 }

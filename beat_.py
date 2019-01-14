@@ -1,3 +1,5 @@
+#!/usr/bin/env python3.7
+# -*- coding: utf-8 -*-
 import numpy as np
 import librosa
 import matplotlib.pyplot as plt
@@ -16,12 +18,10 @@ class Tempo:
 
     def beatevaluation(self,y1,y2,sr):
         samplebeats = self.beat_track(y=y1, sr=sr)
-        diff_samplebeats = librosa.feature.delta(samplebeats)
         audiobeats = self.beat_track(y=y2, sr=sr)
-        diff_audiobeats = librosa.feature.delta(audiobeats)
-        dist, cost, acc, path = dtw(diff_samplebeats.reshape(-1, 1), diff_audiobeats.reshape(-1, 1),
+        dist, cost, acc, path = dtw(np.array(samplebeats).reshape(-1, 1), np.array(audiobeats).reshape(-1, 1),
                                     dist=lambda x, y: np.linalg.norm(x - y, ord=1))
-        mark = (max(0,(1 - math.atan(dist / 10)))) * 100  # 10是上线
+        mark = (max(0,(1 - math.atan(dist / 100)))) * 100  # 100是上线
         return mark
 
     def beattrack_dp(self,localscore,period,tightness):

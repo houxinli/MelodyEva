@@ -341,7 +341,7 @@ input[type=range]::-webkit-slider-thumb {
 .controlDiv{
   position: absolute;
   left:900px;
-  top:30px;
+  top:230px;
 }
 
 .controlBtn {
@@ -354,7 +354,7 @@ input[type=range]::-webkit-slider-thumb {
   display: block;
   padding: 10px;
   border-radius: 8px;
-  margin: 100px auto;
+  margin: 30px;
   width: 200px;
   text-align: center;
   border: none;
@@ -367,7 +367,7 @@ input[type=range]::-webkit-slider-thumb {
 .scoreDiv{
   position: absolute;
   left:1250px;
-  top:350px;
+  top:250px;
 }
 
 
